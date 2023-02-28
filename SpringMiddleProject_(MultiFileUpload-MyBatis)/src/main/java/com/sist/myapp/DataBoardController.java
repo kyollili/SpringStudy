@@ -147,5 +147,18 @@ public class DataBoardController {
 		return "redirect:detail.do?no="+vo.getNo();
 	}
 	
+	@PostMapping("databoard/find.do")
+	public String databoard_find(String[] fs, String ss, Model model)
+	{
+		Map map=new HashMap();
+		map.put("fsArr",fs);
+		map.put("ss",ss);
+		//DAO 연동 = 검색 데이터 읽기
+		List<DataBoardVO> list=dao.databoardFindData(map);
+		int count=dao.FindCount(map);
+		model.addAttribute("count",count);
+		model.addAttribute("list",list);
+		return "databoard/find";
+	}
 	
 }
