@@ -26,7 +26,7 @@ public class JejuController {
 		map.put("start", (curpage*20)-19);
 		map.put("end", curpage*20);
 		List<JejuLocationVO> jList=dao.JejuLocationListData(map);
-		int totalpage=dao.seoulTotalPage();
+		int totalpage=dao.jejuTotalPage();
 		
 		final int BLOCK=10;
 		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
@@ -54,7 +54,7 @@ public class JejuController {
 		map.put("start", (curpage*20)-19);
 		map.put("end", curpage*20);
 		List<JejuFoodVO> jfList=dao.jejuFoodListData(map);
-		int totalpage=dao.seoulTotalPage();
+		int totalpage=dao.jejuTotalPage();
 		
 		final int BLOCK=10;
 		int startPage=((curpage-1)/BLOCK*BLOCK)+1;

@@ -22,7 +22,7 @@ public class JejuDAO {
 	}
 	
 	//@Select("SELECT CEIL(COUNT(*)/20.0) FROM jejuLocation")
-	public int seoulTotalPage()
+	public int jejuTotalPage()
 	{
 		return mapper.jejuTotalPage();
 	}
