@@ -18,7 +18,7 @@ import com.sist.vo.*;
 /*
  * vue => vue.component
  */
-public class FoodController {
+public class FoodFController {
 	@Autowired
 	private FoodDAO dao;
 	
@@ -48,5 +48,9 @@ public class FoodController {
 		return "food/food_detail";
 	}
 	
-	
+	@GetMapping("food/food_find")
+	public String food_find()
+	{
+		return "food/food_find";
+	}
 }

@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 //화면전환은 controller 데이터값 받는건 restcontroller
 @Controller
-public class BoardController {
+public class BoardFController {
    @GetMapping("board/list.do")
    public String board_list()
    {
