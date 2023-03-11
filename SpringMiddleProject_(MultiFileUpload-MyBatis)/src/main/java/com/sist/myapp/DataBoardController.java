@@ -144,8 +144,16 @@ public class DataBoardController {
 	{
 		dao.databoardUpdate(vo);
 		ra.addAttribute("no",vo.getNo());
-		return "redirect:detail.do?no="+vo.getNo();
+		return "redirect:detail.do";
 	}
 	
-	
+	@PostMapping("databoard/find.do")
+	public String databoard_find(String[] fs, String ss, Model model)
+	{
+		Map map=new HashMap();
+		map.put("fsArr", fs);
+		map.put("ss", ss);
+		//DAO ¿¬µ¿
+		return "databoard/find";
+	}
 }

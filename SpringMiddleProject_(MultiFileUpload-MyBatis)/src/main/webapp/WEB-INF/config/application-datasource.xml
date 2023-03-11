@@ -40,9 +40,11 @@
         </bean> 
       </property> 
     </bean>
+    
    <!-- MyBatis 전송 -->
    <bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
       p:dataSource-ref="dataSource"
+      p:configLocation="/WEB-INF/config/Config.xml"
    />
    <!-- Mapper구현 -->
    <mybatis-spring:scan base-package="com.sist.mapper" factory-ref="ssf"/>
