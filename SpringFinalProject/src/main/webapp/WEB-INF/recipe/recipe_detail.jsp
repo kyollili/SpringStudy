@@ -8,6 +8,11 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<style type="text/css">
+.datas:hover{
+	cursor:pointer;
+}
+</style>
 </head>
 <body>
   <div class="wrapper row3 rows">
@@ -50,7 +55,7 @@
   	          <td>
   	            <ul>
   	              <c:forTokens items="${vo.data }" delims="," var="d">
-  	                <li>${d }</li>
+  	                <li><span class="datas" v-on:click="goodsData('${d }')">${d }</span></li>
   	              </c:forTokens>
   	            </ul>
   	          </td>
@@ -67,10 +72,46 @@
   	      </table>
   	    </c:if>
   	  </div>
-  	  <div class="one_half">
-  	  
+  	  <div class="one_half" v-if="isShow">
+  	    <div>
+  	      <div class="col-md-4" v-for="m in goods_list">
+		    <div class="thumbnail">
+		      <a href="#">
+		        <img :src="m.goods_poster" alt="Lights" style="width:100%">
+		        <div class="caption">
+		          <p>{{m.goods_name}}</p>
+		          <p>{{m.goods_price}}</p>
+		        </div>
+		      </a>
+		    </div>
+  		  </div>
+  	    </div>
   	  </div>
   	</main>
   </div>
+  <script>
+    new Vue({
+    	el:'.rows',
+    	data:{
+    		goods_list:[],
+    		isShow:false
+    	},
+    	methods:{
+    		goodsData:function(goods){
+    			//alert(goods);
+    			this.isShow=true;
+    			let _this=this;
+    			axios.get("http://localhost/web/recipe/goods_price_vue.do",{
+    				params:{
+    					goods_name:goods
+    				}
+    			}).then(function(response){
+    				console.log(response.data)
+    				_this.goods_list=response.data
+    			})
+    		}
+    	}
+    })
+  </script>
 </body>
 </html>

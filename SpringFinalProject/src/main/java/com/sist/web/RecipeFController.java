@@ -52,6 +52,6 @@ public class RecipeFController {
 			model.addAttribute("iList1",iList);
 		}
 		model.addAttribute("count",count);
-		return "recipe/recipe_Detail";
+		return "recipe/recipe_detail";
 	}
 }
