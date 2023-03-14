@@ -150,7 +150,6 @@
     		        map.setCenter(coords);
     		    } 
     		});    
-    	 }
      }
   })
 </script>

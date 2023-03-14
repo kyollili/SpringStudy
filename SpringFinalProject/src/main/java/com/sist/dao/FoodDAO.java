@@ -92,4 +92,22 @@ public class FoodDAO {
 		   {
 			   return mapper.foodTop7();
 		   }
+		   
+		 //맛집명을 가지고 온다
+//		 @Select("SELECT DISTINCT name FROM food_location "
+//		   +"WHERE length(name)>1 OR name!='라구'")
+		 public List<String> foodGetNameData()
+		 {
+			 return mapper.foodGetNameData();
+		 }
+		 
+		   //맛집 정보 읽기
+//		 @Select("SELECT fno,name,poster,score,rownum "
+//		   +"FROM (SELECT fno,name,poster,score "
+//		   +"FROM food_location ORDER BY fno ASC) "
+//		   +"WHERE name=#{name} AND rownum=1")
+		 public FoodVO foodInfoData(String name)
+		 {
+			 return mapper.foodInfoData(name);
+		 }
 }

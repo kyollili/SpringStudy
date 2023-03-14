@@ -60,4 +60,18 @@ public class RecipeService {
 	{
 		return cMapper.chefMakeRecipeData(chef);
 	}
+	
+//	@Select("SELECT COUNT(*) FROM recipeDetail "
+//			+"WHERE no=#{no}")
+	public int recipeDetailCount(int no)
+	{
+		return rMapper.recipeDetailCount(no);
+	}
+	
+//	@Select("SELECT * FROM recipeDetail "
+//			+"WHERE no=#{no}")
+	public RecipeDetailVO recipeDetailData(int no)
+	{
+		return rMapper.recipeDetailData(no);
+	}
 }

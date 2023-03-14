@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD
 <mapper namespace="com.sist.mapper.DataBoardMapper">
 	<!-- 
 		 <trim prefixOverrides="OR">
@@ -42,4 +43,8 @@
         </foreach>
       </trim>
   </select>
+=======
+<mapper namespace="com.sist.dao.databoard-mapper">
+
+>>>>>>> branch 'master' of https://github.com/kyollili/SpringStudy.git
 </mapper>

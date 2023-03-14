@@ -144,13 +144,14 @@ public class DataBoardController {
 	{
 		dao.databoardUpdate(vo);
 		ra.addAttribute("no",vo.getNo());
-		return "redirect:detail.do?no="+vo.getNo();
+		return "redirect:detail.do";
 	}
 	
 	@PostMapping("databoard/find.do")
 	public String databoard_find(String[] fs, String ss, Model model)
 	{
 		Map map=new HashMap();
+<<<<<<< HEAD
 		map.put("fsArr",fs);
 		map.put("ss",ss);
 		//DAO 연동 = 검색 데이터 읽기
@@ -161,4 +162,11 @@ public class DataBoardController {
 		return "databoard/find";
 	}
 	
+=======
+		map.put("fsArr", fs);
+		map.put("ss", ss);
+		//DAO 연동
+		return "databoard/find";
+	}
+>>>>>>> branch 'master' of https://github.com/kyollili/SpringStudy.git
 }

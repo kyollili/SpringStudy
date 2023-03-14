@@ -17,4 +17,12 @@ public interface RecipeMapper {
 	
 	@Select("SELECT TO_CHAR(COUNT(*),'999,999') FROM recipe")
 	public String recipeRowCount();
+	
+	@Select("SELECT COUNT(*) FROM recipeDetail "
+			+"WHERE no=#{no}")
+	public int recipeDetailCount(int no);
+	
+	@Select("SELECT * FROM recipeDetail "
+			+"WHERE no=#{no}")
+	public RecipeDetailVO recipeDetailData(int no);
 }
