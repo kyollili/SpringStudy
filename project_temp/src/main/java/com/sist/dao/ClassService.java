@@ -33,13 +33,14 @@ public class ClassService {
 	{
 		return cmapper.classListData(map);
 	}
-
+	
 //	@Select("SELECT cno,title,image,place,location,schedule,notice,time,perprice,totalprice, "
-//	         + "summary,target,tutor_intro,class_intro,class_curri,class_video,onoff,inwon,tutor_info_nickname,tutor_info_img, "
-//	         + "jjim_count FROM CH_CLASSDETAIL_2_3"
-//	         + "WHERE cno=#{cno}")
-	 public ClassDetailVO classDetailData(int cno)
-	 {
-		 return cmapper.classDetailData(cno);
-	 }
+//    + "summary,target,tutor_intro,class_intro,class_curri,class_video,onoff,inwon,tutor_info_nickname,tutor_info_img, "
+//    + "jjim_count FROM CH_CLASSDETAIL_2_3"
+//    + "WHERE cno=#{cno}")
+	public ClassDetailVO classDetailData(int cno)
+	{
+		return cmapper.classDetailData(cno);
+	}
+	
 }

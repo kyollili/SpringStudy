@@ -1,23 +1,90 @@
 package com.sist.web;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.util.*;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 import com.sist.dao.*;
 import com.sist.vo.*;
 @RestController
 public class ClassRestController {
 	@Autowired
 	private ClassService service;
+	
+	@GetMapping(value="class/class_cate_vue.do",produces="text/plain;charset=utf-8")
+	public String class_cate_vue() {
+		List<CategoryVO> list=service.classCateData();
+	     JSONArray arr=new JSONArray();
+	     for(CategoryVO vo:list)
+	     {
+	        JSONObject obj=new JSONObject();
+	        obj.put("cateno", vo.getCateno());
+	        obj.put("catename", vo.getCatename());
+	        arr.add(obj);
+	     }
+	    return arr.toJSONString();
+	}
+	
+	@GetMapping(value="class/class_detail_cate_vue.do",produces="text/plain;charset=utf-8")
+	public String class_detail_cate_vue(int cateno) {
+		List<CategoryDetailVO> list=service.classCateDetailData(cateno);
+		JSONArray arr=new JSONArray();
+		for(CategoryDetailVO vo:list)
+		{
+			JSONObject obj=new JSONObject();
+			obj.put("cateno", vo.getCateno());
+			obj.put("detail_cateno", vo.getDetail_cateno());
+			obj.put("detail_catename", vo.getDetail_catename());
+			arr.add(obj);
+		}
+		return arr.toJSONString();
+	}
+	@GetMapping(value="class/class_list_vue.do",produces="text/plain;charset=utf-8")
+	public String class_list_vue(int cateno,int detail_cateno)
+	{
+		Map map=new HashMap();
+		map.put("cateno", cateno);
+		map.put("detail_cateno", detail_cateno);
+		List<ClassDetailVO> list=service.classListData(map);
+		JSONArray arr=new JSONArray();
+		for(ClassDetailVO vo:list)
+		{
+			//cno,title,image,location,perprice,jjim_count,cateno,
+			//detail_cateno,onoff,tutor_info_nickname
+			JSONObject obj=new JSONObject();
+			obj.put("cno", vo.getCno());
+			obj.put("title", vo.getTitle());
+			obj.put("cateno", vo.getCateno());
+			obj.put("detail_cateno", vo.getDetail_cateno());
+			obj.put("locateion", vo.getLocation());
+			
+			obj.put("perprice", vo.getPerprice());
+			obj.put("jjim_count", vo.getJjim_count());
+			obj.put("onoff", vo.getOnoff());
+			obj.put("tutor_info_nickname", vo.getTutor_info_nickname());
+			String image=vo.getImage();
+			int size=image.indexOf("^");
+			if(size<0)
+			{
+				image=image;
+			}
+			else
+			{
+				image=image.substring(0,image.indexOf("^"));
+			}
+			
+			obj.put("image", image);
+			
+			arr.add(obj);
+		}
+		return arr.toJSONString();
+	}
 	
 	@GetMapping(value="class/cookie_data_vue.do",produces = "text/plain;charset=UTF-8")
 	public String class_cookie_data(HttpServletRequest request)
@@ -64,11 +131,22 @@ public class ClassRestController {
 		obj.put("cateno", vo.getCateno());
 		obj.put("detail_cateno", vo.getDetail_cateno());
 		obj.put("title", vo.getTitle());
-		obj.put("image", vo.getImage());
+		String image=vo.getImage();
+		String image1=image.substring(0,image.indexOf("^"));
+		String image2=image.substring(image.indexOf("^")+1);
+//        image=image.substring(0,image.indexOf("^"));
+        obj.put("image1", image1);
+        obj.put("image2", image2);
 		obj.put("tno", vo.getTno());
-		obj.put("place", vo.getPlace());
-		obj.put("location", vo.getLocation());
-		obj.put("schedule", vo.getSchedule());
+		String place=vo.getPlace();
+		place=place.substring(0,place.indexOf("^"));
+		obj.put("place", place);
+		String location=vo.getLocation();
+		location=location.substring(0,location.indexOf("^"));
+		obj.put("location", location);
+		String schedule=vo.getSchedule();
+        schedule=schedule.substring(0,schedule.indexOf("^"));
+        obj.put("schedule", schedule);
 		obj.put("notice", vo.getNotice());
 		obj.put("time", vo.getTime());
 		obj.put("perprice", vo.getPerprice());
