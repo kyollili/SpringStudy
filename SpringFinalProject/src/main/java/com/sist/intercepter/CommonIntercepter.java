@@ -1,5 +1,6 @@
 package com.sist.intercepter;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,12 +13,28 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * 												|
  * 											@GetMapping/@PostMapping/@RequestMapping => 메소드를 찾아서 처리
  */
-public class CommonInterceptor extends HandlerInterceptorAdapter{
+public class CommonIntercepter extends HandlerInterceptorAdapter{
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// TODO Auto-generated method stub
+		Cookie[] cookies=request.getCookies();
+		if(cookies!=null)
+		{
+			for(int i=0;i<cookies.length;i++)
+			{
+				String key=cookies[i].getName();
+				if(key.equals("id"))
+				{
+					cookies[i].setPath("/");
+					String id=cookies[i].getValue();
+					request.setAttribute("id", id);
+					request.setAttribute("ck", true);
+					break;
+				}
+			}
+		}
 		return super.preHandle(request, response, handler);
 	}
 

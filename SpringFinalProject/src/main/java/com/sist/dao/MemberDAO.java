@@ -1,6 +1,7 @@
 package com.sist.dao;
 import com.sist.vo.*;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,27 +20,20 @@ public class MemberDAO {
 	 */
 	public MemberVO memberLogin(String id,String pwd)
 	{
-		MemberVO vo=new MemberVO();
-		//id체크
-		int count=mapper.memberIdCheck(id);
-		if(count==0) //id가 없는 상태
-		{
-			vo.setMsg("NOID");
-		}
-		else //id가 있는 상태
-		{
-			MemberVO dbvo=mapper.memberLogin(id);
-			if(dbvo.getPwd().equals(pwd))
-			{
-				vo.setMsg("OK");
-				vo.setId(dbvo.getId());
-				vo.setName(dbvo.getName());
-			}
-			else
-			{
-				vo.setMsg("NOPWD");
-			}
-		}
+		MemberVO vo=mapper.memberLogin(id);
+		
 		return vo;
+	}
+	
+//	@Insert("INSERT INTO spring_join " 
+//			+"VALUES(#{id},#{pwd},#{name},'n')")
+	public void memberInsert(MemberVO vo)
+	{
+		mapper.memberInsert(vo);
+	}
+	
+	public int memberIdcheck(String id)
+	{
+		return mapper.memberIdCheck(id);
 	}
 }
