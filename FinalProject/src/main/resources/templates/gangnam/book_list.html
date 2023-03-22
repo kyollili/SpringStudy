@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="wrapper row3">
+  <main class="container clear"> 
+     <div class="row">
+     <table class="table">
+       <tr>
+         <td>
+           <table class="table" th:each="vo:${list}">
+             <tr>
+               <td class="text-center" width="30%" rowspan="4">
+                 <a th:href="@{/gangnam/book_detail(no=${vo.no})}">
+                 <img th:src="${poster}" style="width: 320px;height: 150px" class="img-rounded">
+                 </a>
+               </td>
+               <td width=70%><a th:href="@{/gangnam/book_detail(no=${vo.no})}"><span th:text="${vo.title}"></span></a></td>
+             </tr>
+             <tr>
+              <td width="70%" th:text="${vo.author}"></td>
+             </tr>
+             <tr>
+              <td width="70%" th:text="${vo.category}"></td>
+             </tr>
+             <tr>
+              <td width="70%" th:text="${vo.location}"></td>
+             </tr>
+           </table>
+         </td>
+       </tr>
+     </table>
+   </div>
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<th:block>
+<div class="wrapper row3">
+  <div id="slider" class="clear"> 
+    <div class="flexslider basicslider">
+      <ul class="slides">
+        <li><a href="#"><img class="radius-10" src="images/main1.jpg" style="width:978px;height:400px"></a></li>
+        <li><a href="#"><img class="radius-10" src="images/main2.jpg" style="width:978px;height:400px"></a></li>
+        <li><a href="#"><img class="radius-10" src="images/main3.jpg" style="width:978px;height:400px"></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="wrapper row3">
+  <main class="container clear"> 
+    <!-- ################################################################################################ -->
+    <h2 class="sectiontitle">강남구 전자책 리스트</h2>
+    <!-- ################################################################################################ -->
+    <div class="row">
+  <div class="col-md-3">
+    <div class="thumbnail" th:each="vo:${list}">
+      <a th:href="@{/gangnam/book_detail(no=${vo.no})}">
+        <img th:src="${vo.poster}" alt="Lights" style="width:100%">
+        <div class="caption">
+          <p th:text="${vo.title}"></p>
+        </div>
+      </a>
+    </div>
+  </div>
+  </div>
+     <!-- ################################################################################################ -->
+    <!-- ################################################################################################ --> 
+    <!-- / main body -->
+    <div class="clear"></div>
+  </main>
+</div>
+</th:block>
+</body>
+</html>
