@@ -40,7 +40,7 @@ public class FoodController {
          vo.setAddress(address);
          
          String poster=vo.getPoster();
-         poster=poster.substring(0,poster.lastIndexOf("^"));
+         poster=poster.substring(0,poster.indexOf("^"));
          poster=poster.replace("#", "&");
          vo.setPoster(poster);
       }

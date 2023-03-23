@@ -13,4 +13,9 @@ public interface CategoryDAO extends JpaRepository<CategoryEntity, Integer>{
 	@Query(value="SELECT cno,title,poster FROM project_category",nativeQuery = true)
 	public List<CategoryDataMapping> categoryListData();
 	public CategoryEntity findByCno(@Param("cno") Integer cno);
+	//						WHERE cno=1 and title='' => findByCnoAndName(cno,name)
+	
+	@Query(value="SELECT * FROM project_category "
+			+"WHERE cno BETWEEN :start AND :end",nativeQuery = true)
+	public List<CategoryEntity> categoryChangeData(@Param("start") Integer start,@Param("end") Integer end);
 }
