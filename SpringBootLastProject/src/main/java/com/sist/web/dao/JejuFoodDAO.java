@@ -21,4 +21,15 @@ public interface JejuFoodDAO extends JpaRepository<JejuFoodEntity, Integer>{
 	public int jejuFoodTotalPage();
 	
 	public JejuFoodEntity findByNo(@Param("no") Integer no);
+	
+	@Query(value = "select * from jeju_food "
+			+ "where addr like concat('%',:addr,'%')"
+			+ "limit :start,12",nativeQuery = true)
+	public List<JejuFoodEntity> jejuFindData(@Param("addr") String addr,@Param("start") Integer start);
+	
+	@Query(value = "select CEIL(COUNT(*)/12.0) from jeju_food "
+			+ "where addr like concat('%',:addr,'%')",nativeQuery = true)
+	public int jejuFindTotal(@Param("addr") String addr);
+	
+	
 }

@@ -8,11 +8,15 @@ import java.util.*;
 import com.sist.web.entity.*;
 @Repository
 public interface SeoulLibraryDAO extends JpaRepository<seoulLibraryEntity, Integer>{
-	@Query(value="SELECT * FROM seoul_library limit 0,20",nativeQuery = true)
-	public List<seoulLibraryEntity> LibraryList(@Param("lno") Integer lno);
 	
 	public seoulLibraryEntity findByLno(@Param("lno") Integer lno);
 	
-	@Query(value = "select ceil(count(*)/20.0) from seoul_library",nativeQuery = true)
-	public int libraryTotalPage();
+	@Query(value = "select * from seoul_library "
+			+ "WHERE gu like concat('%',:gu,'%')"
+			+ "limit :start,20",nativeQuery = true)
+	public List<seoulLibraryEntity> libraryFindData(@Param("gu") String gu,@Param("start") Integer start);
+	
+	@Query(value = "select ceil(count(*)/20.0) from seoul_library "
+			+ "where gu like concat('%',:gu,'%')",nativeQuery = true)
+	public int libraryFindTotal(@Param("gu") String gu);
 }

@@ -10,12 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.sist.web.entity.*;
 @Repository
 public interface GangnamDAO extends JpaRepository<gangnamEntity, Integer>{
-	@Query(value="SELECT no,title,poster FROM gangnam_library limit 0,20",nativeQuery = true)
-	public List<LibraryDataMapping> bookListData();
-
-	@Query(value="SELECT * FROM gangnam_library limit 0,20",nativeQuery = true)
-	public List<gangnamEntity> bookList(@Param("no") Integer no);
-	
 	public gangnamEntity findByNo(@Param("no") Integer no);
 	
 	@Query(value="select * from gangnam_library "

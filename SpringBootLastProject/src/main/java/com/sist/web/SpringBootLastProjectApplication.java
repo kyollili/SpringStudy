@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-@ComponentScan(basePackages = {"com.sist.web.dao","com.sist.web.entity","com.sist.web.controller"})
+@ComponentScan(basePackages = {"com.sist.web.dao","com.sist.web.entity","com.sist.web.controller","com.sist.web.news"})
 @EnableAspectJAutoProxy //aop
 @SpringBootApplication
 public class SpringBootLastProjectApplication {

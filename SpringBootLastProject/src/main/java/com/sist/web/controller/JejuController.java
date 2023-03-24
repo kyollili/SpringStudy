@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 import com.sist.web.dao.*;
 import com.sist.web.entity.*;
 @RestController
@@ -95,5 +99,53 @@ public class JejuController {
 	{
 		JejuFoodEntity vo=fdao.findByNo(no);
 		return vo;
+	}
+	
+	@GetMapping("jeju/food_find_react")
+	public List<JejuFindVO> jeju_find(String page,String addr)
+	{
+		List<JejuFindVO> list=new ArrayList<JejuFindVO>();
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		int start=(curpage-1)*12;
+		List<JejuFoodEntity> fList=fdao.jejuFindData(addr, start);
+		int totalpage=fdao.jejuFindTotal(addr);
+		int i=0;
+		for(JejuFoodEntity fvo:fList)
+		{
+			JejuFindVO vo=new JejuFindVO();
+			vo.setNo(fvo.getNo());
+			vo.setPoster(fvo.getPoster());
+			vo.setAddr(fvo.getAddr());
+			vo.setTitle(fvo.getTitle());
+			if(i==0)
+			{
+				vo.setCurpage(curpage);
+				vo.setTotalpage(totalpage);
+			}
+			list.add(vo);
+			i++;
+		}
+		return list;
+	}
+	@GetMapping("jeju/jeju_cookie_react")
+	public List<JejuFoodEntity> jeju_cookie(HttpServletRequest request)
+	{
+		List<JejuFoodEntity> list=new ArrayList<JejuFoodEntity>();
+		Cookie[] cookies=request.getCookies();
+		if(cookies!=null)
+		{
+			for(int i=cookies.length-1;i>=0;i--)
+			{
+				if(cookies[i].getName().startsWith("jeju"))
+				{
+					String no=cookies[i].getValue();
+					JejuFoodEntity vo=fdao.findByNo(Integer.parseInt(no));
+					list.add(vo);
+				}
+			}
+		}
+		return list;
 	}
 }
